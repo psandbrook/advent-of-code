@@ -1,7 +1,7 @@
-(defpackage aoc/day2
+(defpackage aoc/2018/day2
   (:use :cl
         :rove))
-(in-package :aoc/day2)
+(in-package :aoc/2018/day2)
 
 ;;; Part 1
 
