@@ -2,7 +2,7 @@
   :version "0.1.0"
   :author ""
   :license ""
-  :depends-on ("uiop" "genhash" "rove")
+  :depends-on ("bordeaux-threads" "chanl" "uiop" "genhash" "rove")
   :components ((:module "src/2018"
                 :components ((:file "day1")
                              (:file "day2")))
@@ -12,6 +12,7 @@
                              (:file "day3")
                              (:file "day4")
                              (:file "day5")
-                             (:file "day6"))))
+                             (:file "day6")
+                             (:file "day7"))))
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
