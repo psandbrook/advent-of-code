@@ -2,26 +2,11 @@
   (:use :cl
         :3d-vectors
         :uiop
-        :rove)
-  (:import-from :alexandria :once-only))
+        :rove
+        :aoc/util))
 (in-package :aoc/2019/day10)
 
 ;;; Part 1
-
-(defparameter *newline-str* (string #\Newline))
-
-(defmacro print-debug (form)
-  (let ((form-copy form))
-    (once-only (form) `(progn (format t "~a: ~a~%" ',form-copy ,form) ,form))))
-
-(defun coord-x (coord)
-  (first coord))
-
-(defun coord-y (coord)
-  (second coord))
-
-(defun coord (x y)
-  (list x y))
 
 (defun obstructs (coord-a coord-b coord-r)
   (destructuring-bind ((x-a y-a) (x-b y-b) (x-r y-r)) (list coord-a coord-b coord-r)
