@@ -1,8 +1,8 @@
-(defsystem "aoc"
+(defsystem :aoc
   :version "0.1.0"
   :author ""
   :license ""
-  :depends-on ("3d-vectors" "alexandria" "bordeaux-threads" "chanl" "uiop" "genhash" "rove")
+  :depends-on (:3d-vectors :alexandria :bordeaux-threads :chanl :iterate :uiop :genhash :rove)
   :components ((:file "src/util")
                (:module "src/2018"
                         :components ((:file "day1")
@@ -19,6 +19,7 @@
                                      (:file "day8")
                                      (:file "day9")
                                      (:file "day10")
-                                     (:file "day11"))))
+                                     (:file "day11")
+                                     (:file "day12"))))
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
