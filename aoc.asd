@@ -9,7 +9,8 @@
                                      (:file "day2")))
                (:module "src/2019"
                         :depends-on ("src/util")
-                        :components ((:file "day1")
+                        :components ((:file "intcode")
+                                     (:file "day1")
                                      (:file "day2")
                                      (:file "day3")
                                      (:file "day4")
@@ -19,7 +20,8 @@
                                      (:file "day8")
                                      (:file "day9")
                                      (:file "day10")
-                                     (:file "day11")
-                                     (:file "day12"))))
+                                     (:file "day11" :depends-on ("intcode"))
+                                     (:file "day12")
+                                     (:file "day13" :depends-on ("intcode")))))
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
