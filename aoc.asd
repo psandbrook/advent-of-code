@@ -2,7 +2,7 @@
   :version "0.1.0"
   :author ""
   :license ""
-  :depends-on (:3d-vectors :alexandria :bordeaux-threads :chanl :iterate :uiop :genhash :rove)
+  :depends-on (:3d-vectors :alexandria :bordeaux-threads :chanl :iterate :str :uiop :genhash :rove)
   :components ((:file "src/util")
                (:module "src/2018"
                         :components ((:file "day1")
@@ -22,6 +22,7 @@
                                      (:file "day10")
                                      (:file "day11" :depends-on ("intcode"))
                                      (:file "day12")
-                                     (:file "day13" :depends-on ("intcode")))))
+                                     (:file "day13" :depends-on ("intcode"))
+                                     (:file "day14"))))
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
