@@ -21,7 +21,8 @@
 (defmacro print-debug (form)
   (with-gensyms (form-value)
     `(let ((,form-value ,form))
-       (format t "~a: ~s~%" ',form ,form-value) ,form-value)))
+       (format t "~a: ~s~%" ',form ,form-value)
+       ,form-value)))
 
 (defun force-register-test-designator (test-designator hash-function equal-function)
   (handler-bind ((hash-exists (lambda (c)
