@@ -5,7 +5,8 @@
   (:import-from :str :join)
   (:export :*newline-str*
            :*whitespace*
-           :print-debug
+           :dexpr
+           :dline
            :force-register-test-designator
            :format-hash-table
            :hash-equal
@@ -18,11 +19,14 @@
 (defparameter *newline-str* (string #\Newline))
 (defparameter *whitespace* (coerce '(#\Space #\Newline #\Tab) 'string))
 
-(defmacro print-debug (form)
+(defmacro dexpr (form)
   (with-gensyms (form-value)
     `(let ((,form-value ,form))
-       (format t "~a: ~s~%" ',form ,form-value)
+       (format *error-output* "~a: ~s~%" ',form ,form-value)
        ,form-value)))
+
+(defun dline ()
+  (format *error-output* "~%"))
 
 (defun force-register-test-designator (test-designator hash-function equal-function)
   (handler-bind ((hash-exists (lambda (c)
