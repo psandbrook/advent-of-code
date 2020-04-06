@@ -52,29 +52,29 @@
 
 (deftest parts-1-2-test
   (testing "fft"
-    (ok (equalp (fft (parse-fft-input "12345678") 4) (parse-fft-input "01029498")))
+           (ok (equalp (fft (parse-fft-input "12345678") 4) (parse-fft-input "01029498")))
 
-    (ok (equalp (subseq (fft (parse-fft-input "80871224585914546619083218645595") 100) 0 8)
-                (parse-fft-input "24176176")))
+           (ok (equalp (subseq (fft (parse-fft-input "80871224585914546619083218645595") 100) 0 8)
+                       (parse-fft-input "24176176")))
 
-    (ok (equalp (subseq (fft (parse-fft-input "19617804207202209144916044189917") 100) 0 8)
-                (parse-fft-input "73745418")))
+           (ok (equalp (subseq (fft (parse-fft-input "19617804207202209144916044189917") 100) 0 8)
+                       (parse-fft-input "73745418")))
 
-    (ok (equalp (subseq (fft (parse-fft-input "69317163492948606335995924319873") 100) 0 8)
-                (parse-fft-input "52432133"))))
+           (ok (equalp (subseq (fft (parse-fft-input "69317163492948606335995924319873") 100) 0 8)
+                       (parse-fft-input "52432133"))))
 
   (testing "fft-2"
-    (ok (equalp (subseq (fft (make-real-signal (parse-fft-input "03036732577212944063491565474664"))
-                             100 #'fft-phase-2)
-                        0 8)
-                (parse-fft-input "84462026")))
+           (ok (equalp (subseq (fft (make-real-signal (parse-fft-input "03036732577212944063491565474664"))
+                                    100 #'fft-phase-2)
+                               0 8)
+                       (parse-fft-input "84462026")))
 
-    (ok (equalp (subseq (fft (make-real-signal (parse-fft-input "02935109699940807407585447034323"))
-                             100 #'fft-phase-2)
-                        0 8)
-                (parse-fft-input "78725270")))
+           (ok (equalp (subseq (fft (make-real-signal (parse-fft-input "02935109699940807407585447034323"))
+                                    100 #'fft-phase-2)
+                               0 8)
+                       (parse-fft-input "78725270")))
 
-    (ok (equalp (subseq (fft (make-real-signal (parse-fft-input "03081770884921959731165446850517"))
-                             100 #'fft-phase-2)
-                        0 8)
-                (parse-fft-input "53553731")))))
+           (ok (equalp (subseq (fft (make-real-signal (parse-fft-input "03081770884921959731165446850517"))
+                                    100 #'fft-phase-2)
+                               0 8)
+                       (parse-fft-input "53553731")))))

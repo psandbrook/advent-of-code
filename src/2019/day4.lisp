@@ -24,9 +24,9 @@
 
 (deftest part-1-test
   (testing "match-password"
-    (ok (match-password 111111))
-    (ng (match-password 223450))
-    (ng (match-password 123789))))
+           (ok (match-password 111111))
+           (ng (match-password 223450))
+           (ng (match-password 123789))))
 
 ;;; Part 2
 
@@ -35,18 +35,18 @@
         (has-adjacent-digits nil)
         (digits-never-decrease t))
     (loop named outer
-      with i = 0
-      with group-len
-      for c = (elt password-str i)
-      do (incf i)
-         (setf group-len 1)
-         (loop
-           with c2
-           if (>= i (length password-str))
-             do (if (= group-len 2) (setf has-adjacent-digits t)) (return-from outer)
-           do (setf c2 (elt password-str i))
-           if (eql c c2) do (incf i) (incf group-len)
-           else do (if (= group-len 2) (setf has-adjacent-digits t)) (return)))
+          with i = 0
+          with group-len
+          for c = (elt password-str i)
+          do (incf i)
+          (setf group-len 1)
+          (loop
+            with c2
+            if (>= i (length password-str))
+            do (if (= group-len 2) (setf has-adjacent-digits t)) (return-from outer)
+            do (setf c2 (elt password-str i))
+            if (eql c c2) do (incf i) (incf group-len)
+            else do (if (= group-len 2) (setf has-adjacent-digits t)) (return)))
     (loop
       for i upto (- (length password-str) 2)
       for d1 = (digit-char-p (elt password-str i))
@@ -59,6 +59,6 @@
 
 (deftest part-2-test
   (testing "match-password-2"
-    (ok (match-password-2 112233))
-    (ng (match-password-2 123444))
-    (ok (match-password-2 111122))))
+           (ok (match-password-2 112233))
+           (ng (match-password-2 123444))
+           (ok (match-password-2 111122))))

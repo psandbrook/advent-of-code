@@ -64,71 +64,71 @@
 
 (deftest part-1-test
   (testing "best-station"
-    (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
-                                                                   ".#..#" *newline-str*
-                                                                   "....." *newline-str*
-                                                                   "#####" *newline-str*
-                                                                   "....#" *newline-str*
-                                                                   "...##")))
-                '((3 4) 8)))
-    (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
-                                                                   "......#.#." *newline-str*
-                                                                   "#..#.#...." *newline-str*
-                                                                   "..#######." *newline-str*
-                                                                   ".#.#.###.." *newline-str*
-                                                                   ".#..#....." *newline-str*
-                                                                   "..#....#.#" *newline-str*
-                                                                   "#..#....#." *newline-str*
-                                                                   ".##.#..###" *newline-str*
-                                                                   "##...#..#." *newline-str*
-                                                                   ".#....####")))
-                '((5 8) 33)))
-    (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
-                                                                   "#.#...#.#." *newline-str*
-                                                                   ".###....#." *newline-str*
-                                                                   ".#....#..." *newline-str*
-                                                                   "##.#.#.#.#" *newline-str*
-                                                                   "....#.#.#." *newline-str*
-                                                                   ".##..###.#" *newline-str*
-                                                                   "..#...##.." *newline-str*
-                                                                   "..##....##" *newline-str*
-                                                                   "......#..." *newline-str*
-                                                                   ".####.###.")))
-                '((1 2) 35)))
-    (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
-                                                                   ".#..#..###" *newline-str*
-                                                                   "####.###.#" *newline-str*
-                                                                   "....###.#." *newline-str*
-                                                                   "..###.##.#" *newline-str*
-                                                                   "##.##.#.#." *newline-str*
-                                                                   "....###..#" *newline-str*
-                                                                   "..#.#..#.#" *newline-str*
-                                                                   "#..#.#.###" *newline-str*
-                                                                   ".##...##.#" *newline-str*
-                                                                   ".....#.#..")))
-                '((6 3) 41)))
-    (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
-                                                                   ".#..##.###...#######" *newline-str*
-                                                                   "##.############..##." *newline-str*
-                                                                   ".#.######.########.#" *newline-str*
-                                                                   ".###.#######.####.#." *newline-str*
-                                                                   "#####.##.#.##.###.##" *newline-str*
-                                                                   "..#####..#.#########" *newline-str*
-                                                                   "####################" *newline-str*
-                                                                   "#.####....###.#.#.##" *newline-str*
-                                                                   "##.#################" *newline-str*
-                                                                   "#####.##.###..####.." *newline-str*
-                                                                   "..######..##.#######" *newline-str*
-                                                                   "####.##.####...##..#" *newline-str*
-                                                                   ".#####..#.######.###" *newline-str*
-                                                                   "##...#.##########..." *newline-str*
-                                                                   "#.##########.#######" *newline-str*
-                                                                   ".####.#.###.###.#.##" *newline-str*
-                                                                   "....##.##.###..#####" *newline-str*
-                                                                   ".#.#.###########.###" *newline-str*
-                                                                   "#.#.#.#####.####.###" *newline-str*
-                                                                   "###.##.####.##.#..##")))
-                '((11 13) 210)))))
+           (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
+                                                                          ".#..#" *newline-str*
+                                                                          "....." *newline-str*
+                                                                          "#####" *newline-str*
+                                                                          "....#" *newline-str*
+                                                                          "...##")))
+                       '((3 4) 8)))
+           (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
+                                                                          "......#.#." *newline-str*
+                                                                          "#..#.#...." *newline-str*
+                                                                          "..#######." *newline-str*
+                                                                          ".#.#.###.." *newline-str*
+                                                                          ".#..#....." *newline-str*
+                                                                          "..#....#.#" *newline-str*
+                                                                          "#..#....#." *newline-str*
+                                                                          ".##.#..###" *newline-str*
+                                                                          "##...#..#." *newline-str*
+                                                                          ".#....####")))
+                       '((5 8) 33)))
+           (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
+                                                                          "#.#...#.#." *newline-str*
+                                                                          ".###....#." *newline-str*
+                                                                          ".#....#..." *newline-str*
+                                                                          "##.#.#.#.#" *newline-str*
+                                                                          "....#.#.#." *newline-str*
+                                                                          ".##..###.#" *newline-str*
+                                                                          "..#...##.." *newline-str*
+                                                                          "..##....##" *newline-str*
+                                                                          "......#..." *newline-str*
+                                                                          ".####.###.")))
+                       '((1 2) 35)))
+           (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
+                                                                          ".#..#..###" *newline-str*
+                                                                          "####.###.#" *newline-str*
+                                                                          "....###.#." *newline-str*
+                                                                          "..###.##.#" *newline-str*
+                                                                          "##.##.#.#." *newline-str*
+                                                                          "....###..#" *newline-str*
+                                                                          "..#.#..#.#" *newline-str*
+                                                                          "#..#.#.###" *newline-str*
+                                                                          ".##...##.#" *newline-str*
+                                                                          ".....#.#..")))
+                       '((6 3) 41)))
+           (ok (equalp (best-station (parse-asteroid-map-str (concatenate 'string
+                                                                          ".#..##.###...#######" *newline-str*
+                                                                          "##.############..##." *newline-str*
+                                                                          ".#.######.########.#" *newline-str*
+                                                                          ".###.#######.####.#." *newline-str*
+                                                                          "#####.##.#.##.###.##" *newline-str*
+                                                                          "..#####..#.#########" *newline-str*
+                                                                          "####################" *newline-str*
+                                                                          "#.####....###.#.#.##" *newline-str*
+                                                                          "##.#################" *newline-str*
+                                                                          "#####.##.###..####.." *newline-str*
+                                                                          "..######..##.#######" *newline-str*
+                                                                          "####.##.####...##..#" *newline-str*
+                                                                          ".#####..#.######.###" *newline-str*
+                                                                          "##...#.##########..." *newline-str*
+                                                                          "#.##########.#######" *newline-str*
+                                                                          ".####.#.###.###.#.##" *newline-str*
+                                                                          "....##.##.###..#####" *newline-str*
+                                                                          ".#.#.###########.###" *newline-str*
+                                                                          "#.#.#.#####.####.###" *newline-str*
+                                                                          "###.##.####.##.#..##")))
+                       '((11 13) 210)))))
 
 ;;; Part 2
 
@@ -189,25 +189,25 @@
 
 (deftest part-2-test
   (testing "calc-200th-asteroid-vaporized"
-    (ok (eql (find-part-2-answer (parse-asteroid-map-str (concatenate 'string
-                                                                      ".#..##.###...#######" *newline-str*
-                                                                      "##.############..##." *newline-str*
-                                                                      ".#.######.########.#" *newline-str*
-                                                                      ".###.#######.####.#." *newline-str*
-                                                                      "#####.##.#.##.###.##" *newline-str*
-                                                                      "..#####..#.#########" *newline-str*
-                                                                      "####################" *newline-str*
-                                                                      "#.####....###.#.#.##" *newline-str*
-                                                                      "##.#################" *newline-str*
-                                                                      "#####.##.###..####.." *newline-str*
-                                                                      "..######..##.#######" *newline-str*
-                                                                      "####.##.####...##..#" *newline-str*
-                                                                      ".#####..#.######.###" *newline-str*
-                                                                      "##...#.##########..." *newline-str*
-                                                                      "#.##########.#######" *newline-str*
-                                                                      ".####.#.###.###.#.##" *newline-str*
-                                                                      "....##.##.###..#####" *newline-str*
-                                                                      ".#.#.###########.###" *newline-str*
-                                                                      "#.#.#.#####.####.###" *newline-str*
-                                                                      "###.##.####.##.#..##")))
-             802))))
+           (ok (eql (find-part-2-answer (parse-asteroid-map-str (concatenate 'string
+                                                                               ".#..##.###...#######" *newline-str*
+                                                                               "##.############..##." *newline-str*
+                                                                               ".#.######.########.#" *newline-str*
+                                                                               ".###.#######.####.#." *newline-str*
+                                                                               "#####.##.#.##.###.##" *newline-str*
+                                                                               "..#####..#.#########" *newline-str*
+                                                                               "####################" *newline-str*
+                                                                               "#.####....###.#.#.##" *newline-str*
+                                                                               "##.#################" *newline-str*
+                                                                               "#####.##.###..####.." *newline-str*
+                                                                               "..######..##.#######" *newline-str*
+                                                                               "####.##.####...##..#" *newline-str*
+                                                                               ".#####..#.######.###" *newline-str*
+                                                                               "##...#.##########..." *newline-str*
+                                                                               "#.##########.#######" *newline-str*
+                                                                               ".####.#.###.###.#.##" *newline-str*
+                                                                               "....##.##.###..#####" *newline-str*
+                                                                               ".#.#.###########.###" *newline-str*
+                                                                               "#.#.#.#####.####.###" *newline-str*
+                                                                               "###.##.####.##.#..##")))
+                    802))))

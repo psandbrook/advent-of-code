@@ -13,10 +13,10 @@
 
 (deftest part-1-test
   (testing "required-fuel"
-    (ok (= (required-fuel 12) 2))
-    (ok (= (required-fuel 14) 2))
-    (ok (= (required-fuel 1969) 654))
-    (ok (= (required-fuel 100756) 33583))))
+           (ok (= (required-fuel 12) 2))
+           (ok (= (required-fuel 14) 2))
+           (ok (= (required-fuel 1969) 654))
+           (ok (= (required-fuel 100756) 33583))))
 
 ;;; Part 2
 
@@ -33,6 +33,6 @@
 
 (deftest part-2-test
   (testing "complete-required-fuel"
-    (ok (= (complete-required-fuel 14) 2))
-    (ok (= (complete-required-fuel 1969) 966))
-    (ok (= (complete-required-fuel 100756) 50346))))
+           (ok (= (complete-required-fuel 14) 2))
+           (ok (= (complete-required-fuel 1969) 966))
+           (ok (= (complete-required-fuel 100756) 50346))))

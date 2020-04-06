@@ -64,15 +64,15 @@
           (while (cdr sub-moons))
           (for (pos1 v1) = (car sub-moons))
           (iter (for (pos2 v2) in (cdr sub-moons))
-            (destructuring-bind (x1 x2) (new-velocity (x pos1) (x pos2))
-              (incf (x v1) x1)
-              (incf (x v2) x2))
-            (destructuring-bind (y1 y2) (new-velocity (y pos1) (y pos2))
-              (incf (y v1) y1)
-              (incf (y v2) y2))
-            (destructuring-bind (z1 z2) (new-velocity (z pos1) (z pos2))
-              (incf (z v1) z1)
-              (incf (z v2) z2)))))
+                (destructuring-bind (x1 x2) (new-velocity (x pos1) (x pos2))
+                  (incf (x v1) x1)
+                  (incf (x v2) x2))
+                (destructuring-bind (y1 y2) (new-velocity (y pos1) (y pos2))
+                  (incf (y v1) y1)
+                  (incf (y v2) y2))
+                (destructuring-bind (z1 z2) (new-velocity (z pos1) (z pos2))
+                  (incf (z v1) z1)
+                  (incf (z v2) z2)))))
   (iter (for moon in moons)
         (for (pos v) = moon)
         (setf (car moon) (ivec3+ pos v))))
@@ -88,17 +88,17 @@
 
 (deftest part-1-test
   (testing "step-sim-n"
-    (let ((moons (parse-positions (strcat "<x=-1, y=0, z=2>" *newline-str*
-                                          "<x=2, y=-10, z=-7>" *newline-str*
-                                          "<x=4, y=-8, z=8>" *newline-str*
-                                          "<x=3, y=5, z=-1>")))
-          (moons-expected (list (list (make-ivec3 2 1 -3) (make-ivec3 -3 -2 1))
-                                (list (make-ivec3 1 -8 0) (make-ivec3 -1 1 3))
-                                (list (make-ivec3 3 -6 1) (make-ivec3 3 2 -3))
-                                (list (make-ivec3 2 0 4) (make-ivec3 1 -1 -1)))))
-      (step-sim-n moons 10)
-      (ok (moons= moons moons-expected))
-      (ok (= (total-energy moons) 179)))))
+           (let ((moons (parse-positions (strcat "<x=-1, y=0, z=2>" *newline-str*
+                                                 "<x=2, y=-10, z=-7>" *newline-str*
+                                                 "<x=4, y=-8, z=8>" *newline-str*
+                                                 "<x=3, y=5, z=-1>")))
+                 (moons-expected (list (list (make-ivec3 2 1 -3) (make-ivec3 -3 -2 1))
+                                       (list (make-ivec3 1 -8 0) (make-ivec3 -1 1 3))
+                                       (list (make-ivec3 3 -6 1) (make-ivec3 3 2 -3))
+                                       (list (make-ivec3 2 0 4) (make-ivec3 1 -1 -1)))))
+             (step-sim-n moons 10)
+             (ok (moons= moons moons-expected))
+             (ok (= (total-energy moons) 179)))))
 
 ;;; Part 2
 
@@ -134,8 +134,8 @@
     (let ((init-moons (copy-axis-moons axis-moons))
           (moons (copy-axis-moons axis-moons)))
       (iter (for n from 0)
-        (if-first-time nil (if (axis-moons= moons init-moons) (leave n)))
-        (step-sim-axis moons)))))
+            (if-first-time nil (if (axis-moons= moons init-moons) (leave n)))
+            (step-sim-axis moons)))))
 
 (defun find-duplicate-state (moons)
   (flet ((to-axis-moons (moons accessor)
@@ -148,13 +148,13 @@
 
 (deftest part-2-test
   (testing "find-duplicate-state"
-    (ok (= (find-duplicate-state (parse-positions (strcat "<x=-1, y=0, z=2>" *newline-str*
-                                                          "<x=2, y=-10, z=-7>" *newline-str*
-                                                          "<x=4, y=-8, z=8>" *newline-str*
-                                                          "<x=3, y=5, z=-1>")))
-           2772))
-    (ok (= (find-duplicate-state (parse-positions (strcat "<x=-8, y=-10, z=0>" *newline-str*
-                                                          "<x=5, y=5, z=10>" *newline-str*
-                                                          "<x=2, y=-7, z=3>" *newline-str*
-                                                          "<x=9, y=-8, z=-3>")))
-           4686774924))))
+           (ok (= (find-duplicate-state (parse-positions (strcat "<x=-1, y=0, z=2>" *newline-str*
+                                                                 "<x=2, y=-10, z=-7>" *newline-str*
+                                                                 "<x=4, y=-8, z=8>" *newline-str*
+                                                                 "<x=3, y=5, z=-1>")))
+                  2772))
+           (ok (= (find-duplicate-state (parse-positions (strcat "<x=-8, y=-10, z=0>" *newline-str*
+                                                                 "<x=5, y=5, z=10>" *newline-str*
+                                                                 "<x=2, y=-7, z=3>" *newline-str*
+                                                                 "<x=9, y=-8, z=-3>")))
+                  4686774924))))

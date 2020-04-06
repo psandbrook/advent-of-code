@@ -8,14 +8,14 @@
 
 (defun parse-orbit-map (str)
   (mapcan #'(lambda (s) (if (/= (length s) 0) (list (split-string s :separator ")"))))
-          (split-string str :separator (coerce '(#\Newline #\Space) 'string))))
+  (split-string str :separator (coerce '(#\Newline #\Space) 'string))))
 
 (defun make-orbit-tree (orbit-map)
   (loop
     with tree = (make-hash-table :test #'equal)
     for (parent child) in orbit-map
     do (if (gethash parent tree) (push child (gethash parent tree)) (setf (gethash parent tree) (list child)))
-       (if (not (gethash child tree)) (setf (gethash child tree) ()))
+    (if (not (gethash child tree)) (setf (gethash child tree) ()))
     finally (return tree)))
 
 (defun total-orbits (orbit-tree)
@@ -33,8 +33,8 @@
 
 (deftest part-1-test
   (testing "total-orbits"
-    (ok (= (total-orbits (make-orbit-tree (parse-orbit-map "COM)B B)C C)D D)E E)F B)G G)H D)I E)J J)K K)L")))
-           42))))
+           (ok (= (total-orbits (make-orbit-tree (parse-orbit-map "COM)B B)C C)D D)E E)F B)G G)H D)I E)J J)K K)L")))
+                  42))))
 
 ;;; Part 2
 
@@ -43,7 +43,7 @@
     with graph = (make-hash-table :test #'equal)
     for (parent child) in orbit-map
     do (if (gethash parent graph) (push child (gethash parent graph)) (setf (gethash parent graph) (list child)))
-       (if (gethash child graph) (push parent (gethash child graph)) (setf (gethash child graph) (list parent)))
+    (if (gethash child graph) (push parent (gethash child graph)) (setf (gethash child graph) (list parent)))
     finally (return graph)))
 
 (defun transfers-to-san (orbit-graph)
@@ -63,6 +63,6 @@
 
 (deftest part-2-test
   (testing "transfers-to-san"
-    (ok (= (transfers-to-san
-             (make-orbit-graph (parse-orbit-map "COM)B B)C C)D D)E E)F B)G G)H D)I E)J J)K K)L K)YOU I)SAN")))
-           4))))
+           (ok (= (transfers-to-san
+                    (make-orbit-graph (parse-orbit-map "COM)B B)C C)D D)E E)F B)G G)H D)I E)J J)K K)L K)YOU I)SAN")))
+                  4))))

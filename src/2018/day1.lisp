@@ -10,10 +10,10 @@
 
 (deftest calc-freq-test
   (testing "calc-freq"
-    (ok (= (calc-freq '(1 -2 3 1)) 3))
-    (ok (= (calc-freq '(1 1 1)) 3))
-    (ok (= (calc-freq '(1 1 -2)) 0))
-    (ok (= (calc-freq '(-1 -2 -3)) -6))))
+           (ok (= (calc-freq '(1 -2 3 1)) 3))
+           (ok (= (calc-freq '(1 1 1)) 3))
+           (ok (= (calc-freq '(1 1 -2)) 0))
+           (ok (= (calc-freq '(-1 -2 -3)) -6))))
 
 ;;; Part 2
 
@@ -30,8 +30,8 @@
 
 (deftest first-dup-frequency-test
   (testing "first-dup-frequency"
-    (ok (= (first-dup-frequency '(1 -2 3 1)) 2))
-    (ok (= (first-dup-frequency '(1 -1)) 0))
-    (ok (= (first-dup-frequency '(3 3 4 -2 -4)) 10))
-    (ok (= (first-dup-frequency '(-6 3 8 5 -6)) 5))
-    (ok (= (first-dup-frequency '(7 7 -2 -7 -4)) 14))))
+           (ok (= (first-dup-frequency '(1 -2 3 1)) 2))
+           (ok (= (first-dup-frequency '(1 -1)) 0))
+           (ok (= (first-dup-frequency '(3 3 4 -2 -4)) 10))
+           (ok (= (first-dup-frequency '(-6 3 8 5 -6)) 5))
+           (ok (= (first-dup-frequency '(7 7 -2 -7 -4)) 14))))

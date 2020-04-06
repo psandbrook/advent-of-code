@@ -52,7 +52,7 @@
 
 (deftest part-1-test
   (testing "parse-image-str"
-    (ok (equalp (parse-image-str "123456789012" 3 2) '(#2A((1 2 3) (4 5 6)) #2A((7 8 9) (0 1 2)))))))
+           (ok (equalp (parse-image-str "123456789012" 3 2) '(#2A((1 2 3) (4 5 6)) #2A((7 8 9) (0 1 2)))))))
 
 ;;; Part 2
 
@@ -75,4 +75,4 @@
 
 (deftest part-2-test
   (testing "decode-image"
-    (ok (equalp (decode-image (parse-image-str "0222112222120000" 2 2)) #2A((0 1) (1 0))))))
+           (ok (equalp (decode-image (parse-image-str "0222112222120000" 2 2)) #2A((0 1) (1 0))))))
