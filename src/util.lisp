@@ -11,6 +11,7 @@
            :format-hash-table
            :hash-equal
            :hash-combine
+           :extendable-vector
            :coord-x
            :coord-y
            :coord))
@@ -22,7 +23,7 @@
 (defmacro dexpr (form)
   (with-gensyms (form-value)
     `(let ((,form-value ,form))
-       (format *error-output* "~a: ~s~%" ',form ,form-value)
+       (format *error-output* "~s: ~s~%" ',form ,form-value)
        ,form-value)))
 
 (defun dline ()
@@ -52,6 +53,9 @@
 
 (defun hash-combine (acc value-hash)
   (+ (* 37 acc) value-hash))
+
+(defun extendable-vector (&rest objects)
+  (make-array (length objects) :initial-contents objects :adjustable t :fill-pointer t))
 
 (defun coord-x (coord)
   (first coord))

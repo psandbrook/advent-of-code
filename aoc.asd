@@ -25,6 +25,7 @@
                                      (:file "day13" :depends-on ("intcode"))
                                      (:file "day14")
                                      (:file "day15" :depends-on ("intcode"))
-                                     (:file "day16"))))
+                                     (:file "day16")
+                                     (:file "day17" :depends-on ("intcode")))))
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
