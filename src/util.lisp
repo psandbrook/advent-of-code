@@ -2,15 +2,16 @@
   (:use :cl
         :alexandria
         :genhash)
-  (:import-from :str :join)
+  (:import-from :str :concat :join)
   (:export :*newline-str*
            :*whitespace*
            :dexpr
-           :dline
+           :dprint
            :force-register-test-designator
            :format-hash-table
            :hash-equal
            :hash-combine
+           :rpop
            :extendable-vector
            :coord-x
            :coord-y
@@ -26,8 +27,8 @@
        (format *error-output* "~s: ~s~%" ',form ,form-value)
        ,form-value)))
 
-(defun dline ()
-  (format *error-output* "~%"))
+(defun dprint (str)
+  (format *error-output* (concat str "~%")))
 
 (defun force-register-test-designator (test-designator hash-function equal-function)
   (handler-bind ((hash-exists (lambda (c)
@@ -53,6 +54,15 @@
 
 (defun hash-combine (acc value-hash)
   (+ (* 37 acc) value-hash))
+
+(defmacro rpop (place)
+  (with-gensyms (last-2)
+    `(let ((,last-2 (last ,place 2)))
+       (if (eq (cdr ,last-2) nil)
+           (prog1 (car ,last-2)
+             (setf ,place nil))
+           (prog1 (cadr ,last-2)
+             (setf (cdr ,last-2) nil))))))
 
 (defun extendable-vector (&rest objects)
   (make-array (length objects) :initial-contents objects :adjustable t :fill-pointer t))
