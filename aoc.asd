@@ -4,8 +4,6 @@
   :license ""
   :depends-on (:3d-vectors
                :alexandria
-               :bordeaux-threads
-               :chanl
                :iterate
                :lparallel
                :str
@@ -25,7 +23,7 @@
                              (:file "day4")
                              (:file "day5")
                              (:file "day6")
-                             (:file "day7")
+                             (:file "day7" :depends-on ("intcode"))
                              (:file "day8")
                              (:file "day9")
                              (:file "day10")
