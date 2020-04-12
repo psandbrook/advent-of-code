@@ -12,7 +12,9 @@
            :hash-equal
            :hash-combine
            :rpop
+           :make-extendable-vector
            :extendable-vector
+           :extendable-string
            :coord-x
            :coord-y
            :coord))
@@ -64,8 +66,14 @@
            (prog1 (cadr ,last-2)
              (setf (cdr ,last-2) nil))))))
 
+(defun make-extendable-vector (objects &key (element-type t))
+  (make-array (length objects) :element-type element-type :initial-contents objects :adjustable t :fill-pointer t))
+
 (defun extendable-vector (&rest objects)
-  (make-array (length objects) :initial-contents objects :adjustable t :fill-pointer t))
+  (make-extendable-vector objects))
+
+(defun extendable-string (&rest chars)
+  (make-extendable-vector chars :element-type 'character))
 
 (defun coord-x (coord)
   (first coord))
