@@ -3,8 +3,7 @@
         :alexandria
         :iterate
         :rove
-        :aoc/util
-        :aoc/2019/intcode))
+        :aoc/util))
 (in-package :aoc/2019/day19)
 
 ;;; Part 1
@@ -14,9 +13,9 @@
     (iter (for y below 50)
           (iter (for x below 50)
                 (for input = (list x y))
-                (run-computer (make-intcode-computer ints)
-                              :input-f (lambda () (pop input))
-                              :output-f (lambda (x) (incf result x)))))
+                (intcode:run-computer (intcode:make-computer ints)
+                                      :input-f (lambda () (pop input))
+                                      :output-f (lambda (x) (incf result x)))))
     result))
 
 ;;; Part 2
@@ -25,9 +24,9 @@
   (destructuring-bind (y x) point
     (let ((input (list x y))
           output)
-      (run-computer (make-intcode-computer ints)
-                    :input-f (lambda () (pop input))
-                    :output-f (lambda (a) (setf output a)))
+      (intcode:run-computer (intcode:make-computer ints)
+                            :input-f (lambda () (pop input))
+                            :output-f (lambda (a) (setf output a)))
       (= output 1))))
 
 (defun get-line-length (ints y)

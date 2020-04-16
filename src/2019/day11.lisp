@@ -2,14 +2,13 @@
   (:use :cl
         :uiop
         :rove
-        :aoc/util
-        :aoc/2019/intcode))
+        :aoc/util))
 (in-package :aoc/2019/day11)
 
 ;;; Parts 1 & 2
 
 (defun run-painting-robot (intcode-prog &key start-white)
-  (let ((comp (make-intcode-computer intcode-prog))
+  (let ((comp (intcode:make-computer intcode-prog))
         (grid (make-array '(140 140) :initial-element 0 :element-type 'integer))
         (robot-pos (list 50 50))
         (robot-dir 'up)
@@ -17,30 +16,30 @@
         (next-output-index 0))
     (macrolet ((get-grid-at-robot () '(aref grid (coord-x robot-pos) (coord-y robot-pos))))
       (if start-white (setf (get-grid-at-robot) 1))
-      (run-computer comp
-                    :input-f (lambda () (get-grid-at-robot))
-                    :output-f (lambda (x)
-                                (ecase next-output-index
-                                  (0 (setf (get-grid-at-robot) x)
-                                   (pushnew (copy-list robot-pos) coords-painted :test #'equalp)
-                                   (incf next-output-index))
-                                  (1 (setf robot-dir (ecase x
-                                                       (0 (ecase robot-dir
-                                                            (up 'left)
-                                                            (right 'up)
-                                                            (down 'right)
-                                                            (left 'down)))
-                                                       (1 (ecase robot-dir
-                                                            (up 'right)
-                                                            (right 'down)
-                                                            (down 'left)
-                                                            (left 'up)))))
-                                   (ecase robot-dir
-                                     (up (incf (cadr robot-pos)))
-                                     (right (incf (car robot-pos)))
-                                     (down (decf (cadr robot-pos)))
-                                     (left (decf (car robot-pos))))
-                                   (setf next-output-index 0)))))
+      (intcode:run-computer comp
+                            :input-f (lambda () (get-grid-at-robot))
+                            :output-f (lambda (x)
+                                        (ecase next-output-index
+                                          (0 (setf (get-grid-at-robot) x)
+                                           (pushnew (copy-list robot-pos) coords-painted :test #'equalp)
+                                           (incf next-output-index))
+                                          (1 (setf robot-dir (ecase x
+                                                               (0 (ecase robot-dir
+                                                                    (up 'left)
+                                                                    (right 'up)
+                                                                    (down 'right)
+                                                                    (left 'down)))
+                                                               (1 (ecase robot-dir
+                                                                    (up 'right)
+                                                                    (right 'down)
+                                                                    (down 'left)
+                                                                    (left 'up)))))
+                                           (ecase robot-dir
+                                             (up (incf (cadr robot-pos)))
+                                             (right (incf (car robot-pos)))
+                                             (down (decf (cadr robot-pos)))
+                                             (left (decf (car robot-pos))))
+                                           (setf next-output-index 0)))))
       (list (length coords-painted) grid))))
 
 (defun grid-to-strings (grid)
@@ -58,9 +57,9 @@
 (deftest part-1-test
   (testing "run-computer"
            (flet ((check-intcode-prog (str out)
-                    (let ((comp (make-intcode-computer (parse-intcode-str str))))
-                      (run-computer comp)
-                      (equalp (mem comp) (mem (make-intcode-computer (parse-intcode-str out)))))))
+                    (let ((comp (intcode:make-computer (intcode:parse-intcode-str str))))
+                      (intcode:run-computer comp)
+                      (equalp (intcode:mem comp) (intcode:mem (intcode:make-computer (intcode:parse-intcode-str out)))))))
              (ok (check-intcode-prog "1,9,10,3,2,3,11,0,99,30,40,50" "3500,9,10,70,2,3,11,0,99,30,40,50"))
              (ok (check-intcode-prog "1,0,0,0,99" "2,0,0,0,99"))
              (ok (check-intcode-prog "2,3,0,3,99" "2,3,0,6,99"))

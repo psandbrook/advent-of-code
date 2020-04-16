@@ -1,20 +1,21 @@
 (defpackage aoc/2019/intcode
+  (:nicknames :intcode)
   (:use :cl
         :alexandria
         :iterate
         :rove
         :aoc/util)
-  (:export :intcode-computer
+  (:export :computer
            :mem
            :parse-intcode-str
-           :make-intcode-computer
+           :make-computer
            :run-computer-1
            :run-computer-for-input
            :run-computer-for-output
            :run-computer))
 (in-package :aoc/2019/intcode)
 
-(defclass intcode-computer ()
+(defclass computer ()
   ((mem :initarg :mem :accessor mem)
    (ip :initform 0 :accessor ip)
    (relative-base :initform 0 :accessor relative-base)))
@@ -22,11 +23,11 @@
 (defun parse-intcode-str (str)
   (mapcar #'parse-integer (str:split #\, str)))
 
-(defun make-intcode-computer (ints)
-  (make-instance 'intcode-computer :mem (make-array (length ints)
-                                                    :element-type 'integer
-                                                    :initial-contents ints
-                                                    :adjustable t)))
+(defun make-computer (ints)
+  (make-instance 'computer :mem (make-array (length ints)
+                                            :element-type 'integer
+                                            :initial-contents ints
+                                            :adjustable t)))
 
 (defun expand-mem-to (comp pos)
   (if (>= pos (length (mem comp))) (adjust-array (mem comp) (1+ pos) :initial-element 0)))

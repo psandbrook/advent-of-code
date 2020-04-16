@@ -3,8 +3,7 @@
         :alexandria
         :iterate
         :rove
-        :aoc/util
-        :aoc/2019/intcode)
+        :aoc/util)
   (:import-from :str :concat :join :trim))
 (in-package :aoc/2019/day17)
 
@@ -29,22 +28,22 @@
                  (return (join *newline-str* (nreverse strings))))))
 
 (defun get-map (ints)
-  (let ((comp (make-intcode-computer ints))
+  (let ((comp (intcode:make-computer ints))
         (out-line (make-array 0 :adjustable t :fill-pointer 0))
         (out-vector (make-array 0 :adjustable t :fill-pointer 0)))
-    (run-computer comp :output-f (lambda (x)
-                                   (if (= x 10)
-                                       (progn (if (> (length out-line) 0) (vector-push-extend out-line out-vector))
-                                              (setf out-line (make-array 0 :adjustable t :fill-pointer 0)))
-                                       (vector-push-extend (ecase x
-                                                             (35 'scaffold)
-                                                             (46 'space)
-                                                             (94 'robot-up)
-                                                             (118 'robot-down)
-                                                             (60 'robot-left)
-                                                             (62 'robot-right)
-                                                             (88 'robot-fall))
-                                                           out-line))))
+    (intcode:run-computer comp :output-f (lambda (x)
+                                           (if (= x 10)
+                                               (progn (if (> (length out-line) 0) (vector-push-extend out-line out-vector))
+                                                      (setf out-line (make-array 0 :adjustable t :fill-pointer 0)))
+                                               (vector-push-extend (ecase x
+                                                                     (35 'scaffold)
+                                                                     (46 'space)
+                                                                     (94 'robot-up)
+                                                                     (118 'robot-down)
+                                                                     (60 'robot-left)
+                                                                     (62 'robot-right)
+                                                                     (88 'robot-fall))
+                                                                   out-line))))
     (iter (with out-array = (make-array (list (length out-vector) (length (elt out-vector 0)))))
           (for y below (array-dimension out-array 0))
           (iter (for x below (array-dimension out-array 1))
@@ -218,14 +217,14 @@
                      (<= (length a-fun-ints) 20)
                      (<= (length b-fun-ints) 20)
                      (<= (length c-fun-ints) 20)))
-        (run-computer (make-intcode-computer ints)
-                      :input-f (lambda ()
-                                 (if main-routine-ints
-                                     (pop main-routine-ints)
-                                     (if a-fun-ints
-                                         (pop a-fun-ints)
-                                         (if b-fun-ints
-                                             (pop b-fun-ints)
-                                             (if c-fun-ints
-                                                 (pop c-fun-ints)
-                                                 (pop feed-ints)))))))))))
+        (intcode:run-computer (intcode:make-computer ints)
+                              :input-f (lambda ()
+                                         (if main-routine-ints
+                                             (pop main-routine-ints)
+                                             (if a-fun-ints
+                                                 (pop a-fun-ints)
+                                                 (if b-fun-ints
+                                                     (pop b-fun-ints)
+                                                     (if c-fun-ints
+                                                         (pop c-fun-ints)
+                                                         (pop feed-ints)))))))))))

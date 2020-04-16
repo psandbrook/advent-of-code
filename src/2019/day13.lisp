@@ -3,8 +3,7 @@
         :iterate
         :uiop
         :rove
-        :aoc/util
-        :aoc/2019/intcode))
+        :aoc/util))
 (in-package :aoc/2019/day13)
 
 ;;; Parts 1 & 2
@@ -35,32 +34,32 @@
 
 (defun run-arcade-cabinet (intcode-prog &key play-for-free)
   (if play-for-free (setf (first intcode-prog) 2))
-  (let ((comp (make-intcode-computer intcode-prog))
+  (let ((comp (intcode:make-computer intcode-prog))
         (grid (make-array '(24 41) :element-type 'integer :initial-element 0))
         (score 0)
         (next-output-index 0)
         (next-tile-x)
         (next-tile-y))
-    (run-computer comp
-                  :input-f (lambda ()
-                             (let* ((paddle-pos (find-pos grid *paddle-tile*))
-                                    (ball-pos (find-pos grid *ball-tile*))
-                                    (paddle-x (coord-x paddle-pos))
-                                    (ball-x (coord-x ball-pos)))
-                               (cond ((< paddle-x ball-x) 1)
-                                     ((> paddle-x ball-x) -1)
-                                     (t 0))))
-                  :output-f (lambda (val)
-                              (ecase next-output-index
-                                (0 (setf next-tile-x val)
-                                 (incf next-output-index))
-                                (1 (setf next-tile-y val)
-                                 (incf next-output-index))
-                                (2 (if (and (= next-tile-x -1) (= next-tile-y 0))
-                                       (progn (setf score val)
-                                              (format t "SCORE: ~a~%" score))
-                                       (setf (aref grid next-tile-y next-tile-x) val))
-                                 (setf next-output-index 0)))))
+    (intcode:run-computer comp
+                          :input-f (lambda ()
+                                     (let* ((paddle-pos (find-pos grid *paddle-tile*))
+                                            (ball-pos (find-pos grid *ball-tile*))
+                                            (paddle-x (coord-x paddle-pos))
+                                            (ball-x (coord-x ball-pos)))
+                                       (cond ((< paddle-x ball-x) 1)
+                                             ((> paddle-x ball-x) -1)
+                                             (t 0))))
+                          :output-f (lambda (val)
+                                      (ecase next-output-index
+                                        (0 (setf next-tile-x val)
+                                         (incf next-output-index))
+                                        (1 (setf next-tile-y val)
+                                         (incf next-output-index))
+                                        (2 (if (and (= next-tile-x -1) (= next-tile-y 0))
+                                               (progn (setf score val)
+                                                      (format t "SCORE: ~a~%" score))
+                                               (setf (aref grid next-tile-y next-tile-x) val))
+                                         (setf next-output-index 0)))))
     (let ((block-tiles (iter (for y below (array-dimension grid 0))
                              (sum (iter (for x below (array-dimension grid 1))
                                         (counting (= (aref grid y x) *block-tile*)))))))
