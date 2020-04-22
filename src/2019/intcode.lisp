@@ -10,6 +10,10 @@
            :parse-intcode-str
            :make-computer
            :run-computer-1
+           :input
+           :output
+           :stop
+           :continue
            :run-computer-for-input
            :run-computer-for-output
            :run-computer))
