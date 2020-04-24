@@ -11,8 +11,8 @@
 (defun execute-network (ints &key nat)
   (let ((computers (make-array 50 :initial-element nil)))
     (iter (for i below (length computers))
-      (setf (elt computers i) (list (intcode:make-computer ints) ()))
-      (intcode:run-computer-for-input (first (elt computers i)) i))
+          (setf (elt computers i) (list (intcode:make-computer ints) ()))
+          (intcode:run-computer-for-input (first (elt computers i)) i))
 
     (iter
       (with i = 0)
@@ -28,9 +28,9 @@
                                                  (if receive-packet
                                                      (pop receive-packet)
                                                      (if-let (p (rpop (second (elt computers i))))
-                                                       (progn (setf receive-packet p)
-                                                              (pop receive-packet))
-                                                       -1)))
+                                                             (progn (setf receive-packet p)
+                                                                    (pop receive-packet))
+                                                             -1)))
                                       :output-f (lambda (x) (push x send-packet)))
           (intcode:input (if (not receive-packet) (finish)))
           (intcode:output (when (= (length send-packet) 3)
@@ -52,8 +52,8 @@
                    (>= no-send 3)
                    (iter (for (nil recv) in-vector computers) (always (emptyp recv))))
           (if-let (value (gethash (second nat-packet) seen-nat-packets))
-            (return-from execute-network (second nat-packet))
-            (setf (gethash (second nat-packet) seen-nat-packets) t))
+                  (return-from execute-network (second nat-packet))
+                  (setf (gethash (second nat-packet) seen-nat-packets) t))
           (push nat-packet (second (elt computers 0)))
           (setf no-send 0))
         (setf i 0

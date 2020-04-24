@@ -24,64 +24,64 @@
 (defun deal-with-increment (deck n)
   (let ((out (make-array (length deck) :initial-element nil)))
     (iter (for x in deck)
-      (with index = 0)
-      (setf (elt out index) x)
-      (incf index n)
-      (if (>= index (length out)) (decf index (length out))))
+          (with index = 0)
+          (setf (elt out index) x)
+          (incf index n)
+          (if (>= index (length out)) (decf index (length out))))
     (coerce out 'list)))
 
 (defun parse-shuffle (str)
   (iter (for l in (str:lines str))
-    (if (equal l "deal into new stack")
-        (collect (list 'deal-into-new-stack))
-        (multiple-value-bind (result suffix) (starts-with-subseq "deal with increment" l :return-suffix t)
-          (if result
-              (collect (list 'deal-with-increment (parse-integer suffix)))
-              (multiple-value-bind (result suffix) (starts-with-subseq "cut" l :return-suffix t)
-                (assert result)
-                (collect (list 'cut (parse-integer suffix)))))))))
+        (if (equal l "deal into new stack")
+            (collect (list 'deal-into-new-stack))
+            (multiple-value-bind (result suffix) (starts-with-subseq "deal with increment" l :return-suffix t)
+              (if result
+                  (collect (list 'deal-with-increment (parse-integer suffix)))
+                  (multiple-value-bind (result suffix) (starts-with-subseq "cut" l :return-suffix t)
+                    (assert result)
+                    (collect (list 'cut (parse-integer suffix)))))))))
 
 (defun execute-shuffle (shuffle deck)
   (iter (for (instr n) in shuffle)
-    (setf deck (ecase instr
-                 (deal-into-new-stack (deal-into-new-stack deck))
-                 (cut (cut deck n))
-                 (deal-with-increment (deal-with-increment deck n)))))
+        (setf deck (ecase instr
+                     (deal-into-new-stack (deal-into-new-stack deck))
+                     (cut (cut deck n))
+                     (deal-with-increment (deal-with-increment deck n)))))
   deck)
 
 (deftest part-1-test
   (testing "shuffle"
-    (let ((deck (iter (for i below 10) (collect i))))
-      (ok (equal (execute-shuffle (parse-shuffle (str:unlines (list "deal with increment 7"
-                                                                    "deal into new stack"
-                                                                    "deal into new stack")))
-                                  (copy-list deck))
-                 '(0 3 6 9 2 5 8 1 4 7)))
+           (let ((deck (iter (for i below 10) (collect i))))
+             (ok (equal (execute-shuffle (parse-shuffle (str:unlines (list "deal with increment 7"
+                                                                           "deal into new stack"
+                                                                           "deal into new stack")))
+                                         (copy-list deck))
+                        '(0 3 6 9 2 5 8 1 4 7)))
 
-      (ok (equal (execute-shuffle (parse-shuffle (str:unlines (list "cut 6"
-                                                                    "deal with increment 7"
-                                                                    "deal into new stack")))
-                                  (copy-list deck))
-                 '(3 0 7 4 1 8 5 2 9 6)))
+             (ok (equal (execute-shuffle (parse-shuffle (str:unlines (list "cut 6"
+                                                                           "deal with increment 7"
+                                                                           "deal into new stack")))
+                                         (copy-list deck))
+                        '(3 0 7 4 1 8 5 2 9 6)))
 
-      (ok (equal (execute-shuffle (parse-shuffle (str:unlines (list "deal with increment 7"
-                                                                    "deal with increment 9"
-                                                                    "cut -2")))
-                                  (copy-list deck))
-                 '(6 3 0 7 4 1 8 5 2 9)))
+             (ok (equal (execute-shuffle (parse-shuffle (str:unlines (list "deal with increment 7"
+                                                                           "deal with increment 9"
+                                                                           "cut -2")))
+                                         (copy-list deck))
+                        '(6 3 0 7 4 1 8 5 2 9)))
 
-      (ok (equal (execute-shuffle (parse-shuffle (str:unlines (list "deal into new stack"
-                                                                    "cut -2"
-                                                                    "deal with increment 7"
-                                                                    "cut 8"
-                                                                    "cut -4"
-                                                                    "deal with increment 7"
-                                                                    "cut 3"
-                                                                    "deal with increment 9"
-                                                                    "deal with increment 3"
-                                                                    "cut -1")))
-                                  (copy-list deck))
-                 '(9 2 5 8 1 4 7 0 3 6))))))
+             (ok (equal (execute-shuffle (parse-shuffle (str:unlines (list "deal into new stack"
+                                                                           "cut -2"
+                                                                           "deal with increment 7"
+                                                                           "cut 8"
+                                                                           "cut -4"
+                                                                           "deal with increment 7"
+                                                                           "cut 3"
+                                                                           "deal with increment 9"
+                                                                           "deal with increment 3"
+                                                                           "cut -1")))
+                                         (copy-list deck))
+                        '(9 2 5 8 1 4 7 0 3 6))))))
 
 ;;; Part 2
 
@@ -104,10 +104,10 @@
       (let ((result 1))
         (setf b (mod b m))
         (iter (while (> e 0))
-          (when (= (mod e 2) 1)
-            (setf result (mod (* result b) m)))
-          (setf e (ash e -1)
-                b (mod (* b b) m)))
+              (when (= (mod e 2) 1)
+                (setf result (mod (* result b) m)))
+              (setf e (ash e -1)
+                    b (mod (* b b) m)))
         result)))
 
 (defun deal-with-increment-2 (deck deck-length n)
@@ -118,12 +118,12 @@
 
 (defun execute-shuffle-2 (shuffle deck deck-length)
   (iter (for (instr n) in shuffle)
-    (setf deck (ecase instr
-                 (deal-into-new-stack (deal-into-new-stack-2 deck))
-                 (cut (cut-2 deck n))
-                 (deal-with-increment (deal-with-increment-2 deck deck-length n))))
-    (iter (for cons on deck)
-      (setf (car cons) (mod (car cons) deck-length))))
+        (setf deck (ecase instr
+                     (deal-into-new-stack (deal-into-new-stack-2 deck))
+                     (cut (cut-2 deck n))
+                     (deal-with-increment (deal-with-increment-2 deck deck-length n))))
+        (iter (for cons on deck)
+              (setf (car cons) (mod (car cons) deck-length))))
   deck)
 
 (defun do-n-shuffles (shuffle deck-length n)
@@ -134,7 +134,7 @@
                             (modular-expt (1- increment-mul) (- deck-length 2) deck-length))
                          new-increment)))
       (iter (for cons on result)
-        (setf (car cons) (mod (car cons) deck-length)))
+            (setf (car cons) (mod (car cons) deck-length)))
       result)))
 
 (defun card-at (deck deck-length n)
