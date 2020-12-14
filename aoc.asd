@@ -41,6 +41,11 @@
                              (:file "day22")
                              (:file "day23" :depends-on ("intcode"))
                              (:file "day24")
-                             (:file "day25" :depends-on ("intcode")))))
+                             (:file "day25" :depends-on ("intcode"))))
+
+               (:module "src/2020"
+                :depends-on ("src/util")
+                :components ((:file "day1"))))
+
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
