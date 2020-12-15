@@ -7,6 +7,7 @@
                :iterate
                :lparallel
                :str
+               :cl-ppcre
                :uiop
                :genhash
                :rove)
@@ -45,7 +46,8 @@
 
                (:module "src/2020"
                 :depends-on ("src/util")
-                :components ((:file "day1"))))
+                :components ((:file "day1")
+                             (:file "day2"))))
 
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
