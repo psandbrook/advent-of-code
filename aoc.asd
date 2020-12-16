@@ -48,7 +48,8 @@
                 :depends-on ("src/util")
                 :components ((:file "day1")
                              (:file "day2")
-                             (:file "day3"))))
+                             (:file "day3")
+                             (:file "day4"))))
 
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
