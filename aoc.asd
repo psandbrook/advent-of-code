@@ -7,6 +7,7 @@
                :iterate
                :lparallel
                :str
+               :cl-interpol
                :cl-ppcre
                :uiop
                :genhash
@@ -51,7 +52,8 @@
                              (:file "day3")
                              (:file "day4")
                              (:file "day5")
-                             (:file "day6"))))
+                             (:file "day6")
+                             (:file "day7"))))
 
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
