@@ -53,7 +53,8 @@
                              (:file "day4")
                              (:file "day5")
                              (:file "day6")
-                             (:file "day7"))))
+                             (:file "day7")
+                             (:file "day8"))))
 
   :description ""
   :perform (test-op (op c) (symbol-call :rove :run c)))
