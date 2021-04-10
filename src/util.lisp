@@ -17,7 +17,12 @@
            :extendable-string
            :coord-x
            :coord-y
-           :coord))
+           :coord
+           :make-queue
+           :queue-empty
+           :queue-push
+           :queue-pop
+           :queue-front))
 (in-package :aoc/util)
 
 (defparameter *newline-str* (string #\Newline))
@@ -83,3 +88,28 @@
 
 (defun coord (x y)
   (list x y))
+
+(defun make-queue ()
+  (cons nil nil))
+
+(defun queue-empty (q)
+  (not (car q)))
+
+(defun queue-push (q e)
+  (if (queue-empty q)
+      (progn
+        (setf (car q) (cons e nil))
+        (setf (cdr q) (car q)))
+      (progn
+        (setf (cddr q) (cons e nil))
+        (setf (cdr q) (cddr q)))))
+
+(defun queue-pop (q)
+  (let ((e (caar q)))
+    (setf (car q) (cadr q))
+    (if (not (car q))
+        (setf (cdr q) nil))
+    e))
+
+(defun queue-front (q)
+  (car q))
